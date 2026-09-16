@@ -1,0 +1,44 @@
+=== arm PR poll (fm-pr-check.sh) ===
+armed: state/live-b46.check.sh
+--- rc=0 ---
+=== meta after arming (tail) ===
+model=default
+effort=default
+pr=https://github.com/example/repo/pull/46
+pr_head=0123456789abcdef0123456789abcdef01234567
+=== fm_pr_poll_artifacts_valid BEFORE relaunch: PASS ===
+=== relaunch (fm-control.sh) ===
+warning: /tmp/fm-live-drive/live-b46/home/data/live-b46/launch-brief.md records no delivery contract line (scaffolded before ship briefs recorded one); launching on the explicit --mode no-mistakes - confirm its definition of done matches
+relaunched live-b46 harness=claude from=claude model=default effort=default backend=tmux endpoint=fmses:fm-live-b46 worktree=/tmp/fm-live-drive/live-b46/wt
+--- rc=0 ---
+=== meta after relaunch (full) ===
+window=fmses:fm-live-b46
+endpoint_task_id=live-b46
+worktree=/tmp/fm-live-drive/live-b46/wt
+project=/tmp/fm-live-drive/live-b46/proj
+harness=claude
+kind=ship
+mode=no-mistakes
+yolo=off
+tasktmp=/tmp/fm-live-b46
+model=default
+effort=default
+busy_gen=g1789570435.1853042.11121
+spawn_gen=s1789570435.1852724.32598
+pr=https://github.com/example/repo/pull/46
+pr_head=0123456789abcdef0123456789abcdef01234567
+control_relaunch_tx=1852433.20260916T145355Z.17831
+traceparent=00-e711fe488067dd95d322b4adbf6212bc-2cdb42c3f8d40d30-01
+=== meta tail line ===
+traceparent=00-e711fe488067dd95d322b4adbf6212bc-2cdb42c3f8d40d30-01
+=== fm_pr_poll_artifacts_valid AFTER relaunch: FAIL ===
+=== state/live-b46.check.sh with PR state=OPEN (expect silent) ===
+--- rc=0 ---
+=== state/live-b46.check.sh with PR state=MERGED (expect 'merged') ===
+merged
+--- rc=0 ---
+=== traceparent line and position ===
+17:traceparent=00-e711fe488067dd95d322b4adbf6212bc-2cdb42c3f8d40d30-01
+14:pr=https://github.com/example/repo/pull/46
+15:pr_head=0123456789abcdef0123456789abcdef01234567
+CASE_DONE
