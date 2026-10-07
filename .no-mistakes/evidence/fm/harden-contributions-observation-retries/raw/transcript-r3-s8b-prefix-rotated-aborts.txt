@@ -1,0 +1,22 @@
+=== scenario: s8b-prefix-rotated-aborts
+=== when: 2026-10-07T16:17:18Z
+=== product: /tmp/fm-lab.WH6E30/prefix/bin/fm-contributions.sh
+=== proxy rules: 1:fail 2:fail
+=== budget: 20s, polls: 1
+
+$ before:
+delivery: {"checked_at":"2026-01-01T00:00:00Z","error":null,"fresh_head":"e032f755e72ef9771458ae0064ef215900062c3a","state":"open"}
+gitlab: {"checked_at":"2026-01-01T00:00:00Z","error":null,"fresh_head":"e032f755e72ef9771458ae0064ef215900062c3a","state":"open"}
+$ proxy on 127.0.0.1:19012
+$ poll 1/1 rc=1 elapsed=0s
+--- poll 1 stdout/stderr (verbatim):
+/tmp/fm-lab.WH6E30/prefix/bin/fm-contributions.sh: line 416: BUDGET_EXHAUSTED: unbound variable
+--- records after poll 1:
+delivery: {"checked_at":"2026-01-01T00:00:00Z","error":null,"fresh_head":"e032f755e72ef9771458ae0064ef215900062c3a","state":"open"}
+gitlab: {"checked_at":"2026-01-01T00:00:00Z","error":null,"fresh_head":"e032f755e72ef9771458ae0064ef215900062c3a","state":"open"}
+--- forge connection log (proxy-19012.log):
+12:17:18 proxy listening on 127.0.0.1:19012
+--- wake queue:
+(empty)
+=== end scenario: s8b-prefix-rotated-aborts
+

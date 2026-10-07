@@ -1,0 +1,25 @@
+=== scenario: s8-cross-url-detail-probe
+=== when: 2026-10-07T15:49:51Z
+=== product: /tmp/fm-lab.7alkC6/probe/bin/fm-contributions.sh
+=== proxy rules (CONNECT ordinal:action[:seconds]): 1:fail 2:fail
+=== budget: 20s, polls: 1
+
+$ LAB=$LAB /tmp/fm-lab.7alkC6/fixture.sh reset
+$ before: {"task":"delivery","checked_at":"2026-01-01T00:00:00Z","error":null,"pending":0,"head":"e032f755e72ef9771458ae0064ef215900062c3a","state":"open"}
+{"task":"gitlab","checked_at":"2026-01-01T00:00:00Z","error":null,"pending":0,"head":null,"state":null}
+$ /tmp/fm-lab.7alkC6/proxy-run.sh 18931 1:fail 2:fail
+$ env -u NO_MISTAKES_GATE ... FM_HOME=$LAB HTTPS_PROXY=http://127.0.0.1:18931 FM_CONTRIBUTIONS_BUDGET=20 /tmp/fm-lab.7alkC6/probe/bin/fm-contributions.sh poll   # poll 1/1
+poll 1 rc=0 elapsed=1s
+--- poll 1 stdout/stderr (verbatim):
+contributions: observation unavailable for https://github.com/kunchenguid/firstmate/pull/6780
+contributions: observation unavailable for https://gitlab.com/foo/bar/-/merge_requests/1
+--- record after poll 1:
+{"task":"delivery","checked_at":"2026-10-07T15:40:00Z","error":"forge observation unavailable or changed during read: Get \"https://api.github.com/repos/kunchenguid/firstmate/pulls/6780\": Bad Gateway","pending":0,"head":"e032f755e72ef9771458ae0064ef215900062c3a","state":"open"}
+{"task":"gitlab","checked_at":"2026-10-07T15:40:00Z","error":"forge observation unavailable or changed during read","pending":0,"head":null,"state":null}
+--- wake queue:
+(empty)
+--- forge connection log (proxy-18931.log):
+11:49:51 proxy listening on 127.0.0.1:18931
+11:49:53 #1 api.github.com:443 FAIL (CONNECT 502)
+11:49:53 #2 api.github.com:443 FAIL (CONNECT 502)
+=== end scenario: s8-cross-url-detail-probe

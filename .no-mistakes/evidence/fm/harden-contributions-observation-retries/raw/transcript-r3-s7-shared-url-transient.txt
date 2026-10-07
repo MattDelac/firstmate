@@ -1,0 +1,38 @@
+=== scenario: s7-shared-url-transient
+=== when: 2026-10-07T16:17:15Z
+=== product: /home/matt/.no-mistakes/worktrees/62c0a9471fe0/01M4BFZH3G7J8QYS8V515S9SC1/bin/fm-contributions.sh
+=== proxy rules: 1:fail
+=== budget: 20s, polls: 1
+
+$ before:
+delivery: {"checked_at":"2026-01-01T00:00:00Z","error":null,"fresh_head":"e032f755e72ef9771458ae0064ef215900062c3a","state":"open"}
+duplicate: {"checked_at":"2026-01-01T00:00:00Z","error":null,"fresh_head":"e032f755e72ef9771458ae0064ef215900062c3a","state":"open"}
+$ proxy on 127.0.0.1:19009
+$ poll 1/1 rc=0 elapsed=2s
+--- poll 1 stdout/stderr (verbatim):
+--- records after poll 1:
+delivery: {"checked_at":"2026-07-15T12:00:00Z","error":null,"fresh_head":"e032f755e72ef9771458ae0064ef215900062c3a","state":"open"}
+duplicate: {"checked_at":"2026-07-15T12:00:00Z","error":null,"fresh_head":"e032f755e72ef9771458ae0064ef215900062c3a","state":"open"}
+--- forge connection log (proxy-19009.log):
+12:17:15 proxy listening on 127.0.0.1:19009
+12:17:15 #1 api.github.com:443 FAIL (CONNECT 502)
+12:17:15 #2 api.github.com:443 TUNNEL
+12:17:16 #2 api.github.com:443 CLOSE
+12:17:16 #6 api.github.com:443 TUNNEL
+12:17:16 #4 api.github.com:443 TUNNEL
+12:17:16 #7 api.github.com:443 TUNNEL
+12:17:16 #5 api.github.com:443 TUNNEL
+12:17:16 #8 api.github.com:443 TUNNEL
+12:17:16 #3 api.github.com:443 TUNNEL
+12:17:16 #4 api.github.com:443 CLOSE
+12:17:16 #5 api.github.com:443 CLOSE
+12:17:16 #6 api.github.com:443 CLOSE
+12:17:16 #3 api.github.com:443 CLOSE
+12:17:16 #7 api.github.com:443 CLOSE
+12:17:16 #8 api.github.com:443 CLOSE
+12:17:16 #9 api.github.com:443 TUNNEL
+12:17:17 #9 api.github.com:443 CLOSE
+--- wake queue:
+(empty)
+=== end scenario: s7-shared-url-transient
+

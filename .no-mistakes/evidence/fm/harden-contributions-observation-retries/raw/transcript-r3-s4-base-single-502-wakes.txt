@@ -1,0 +1,21 @@
+=== scenario: s4-base-single-502-wakes
+=== when: 2026-10-07T16:17:04Z
+=== product: /tmp/fm-lab.WH6E30/base/bin/fm-contributions.sh
+=== proxy rules: 1:fail
+=== budget: 20s, polls: 1
+
+$ before:
+delivery: {"checked_at":"2026-01-01T00:00:00Z","error":null,"fresh_head":"e032f755e72ef9771458ae0064ef215900062c3a","state":"open"}
+$ proxy on 127.0.0.1:19006
+$ poll 1/1 rc=0 elapsed=0s
+--- poll 1 stdout/stderr (verbatim):
+contributions: observation unavailable for https://github.com/kunchenguid/firstmate/pull/6780
+--- records after poll 1:
+delivery: {"checked_at":"2026-07-15T12:00:00Z","error":"forge observation unavailable or changed during read","fresh_head":"e032f755e72ef9771458ae0064ef215900062c3a","state":"open"}
+--- forge connection log (proxy-19006.log):
+12:17:04 proxy listening on 127.0.0.1:19006
+12:17:04 #1 api.github.com:443 FAIL (CONNECT 502)
+--- wake queue:
+(empty)
+=== end scenario: s4-base-single-502-wakes
+

@@ -1,0 +1,13 @@
+=== scenario: s0-plain-healthy (no proxy at all)
+=== when: 2026-10-07T15:50:00Z
+$ LAB=$LAB /tmp/fm-lab.7alkC6/fixture.sh reset
+$ before: {"task":"delivery","checked_at":"2026-01-01T00:00:00Z","error":null,"pending":0,"head":"e032f755e72ef9771458ae0064ef215900062c3a","state":"open"}
+$ env -u NO_MISTAKES_GATE ... FM_HOME=$LAB bin/fm-contributions.sh poll
+poll rc=0 elapsed=2s
+--- poll stdout/stderr (verbatim):
+
+--- record after:
+{"task":"delivery","checked_at":"2026-10-07T15:50:00Z","error":null,"pending":0,"head":"e032f755e72ef9771458ae0064ef215900062c3a","state":"open"}
+--- wake queue:
+(empty)
+=== end scenario: s0-plain-healthy

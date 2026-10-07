@@ -1,0 +1,21 @@
+=== scenario: s2-base
+=== when: 2026-10-07T15:45:08Z
+=== product: /tmp/fm-lab.7alkC6/base/bin/fm-contributions.sh
+=== proxy rules (CONNECT ordinal:action[:seconds]): 1:delay:7
+=== budget: 20s
+
+$ LAB=$LAB /tmp/fm-lab.7alkC6/fixture.sh reset
+$ before: {"checked_at":"2026-01-01T00:00:00Z","error":null,"head":"e032f755e72ef9771458ae0064ef215900062c3a","state":"open","reviews":0,"events":0}
+$ /tmp/fm-lab.7alkC6/proxy-run.sh 18922 1:delay:7
+$ env -u NO_MISTAKES_GATE ... FM_HOME=$LAB HTTPS_PROXY=http://127.0.0.1:18922 FM_CONTRIBUTIONS_BUDGET=20 /tmp/fm-lab.7alkC6/base/bin/fm-contributions.sh poll
+poll rc=0 elapsed=5s
+--- poll stdout/stderr (verbatim):
+
+--- record after:
+{"checked_at":"2026-01-01T00:00:00Z","error":null,"head":"e032f755e72ef9771458ae0064ef215900062c3a","state":"open","reviews":0,"events":0}
+--- wake queue:
+(empty)
+--- forge connection log (proxy-18922.log):
+11:45:08 proxy listening on 127.0.0.1:18922
+11:45:09 #1 api.github.com:443 DELAY 7s begin
+=== end scenario: s2-base

@@ -1,0 +1,36 @@
+=== scenario: s1-proxy-passthrough
+=== when: 2026-10-07T15:50:02Z
+=== product: bin/fm-contributions.sh
+=== proxy rules (CONNECT ordinal:action[:seconds]): 
+=== budget: 20s, polls: 1
+
+$ LAB=$LAB /tmp/fm-lab.7alkC6/fixture.sh reset
+$ before: {"task":"delivery","checked_at":"2026-01-01T00:00:00Z","error":null,"pending":0,"head":"e032f755e72ef9771458ae0064ef215900062c3a","state":"open"}
+$ /tmp/fm-lab.7alkC6/proxy-run.sh 18920 
+$ env -u NO_MISTAKES_GATE ... FM_HOME=$LAB HTTPS_PROXY=http://127.0.0.1:18920 FM_CONTRIBUTIONS_BUDGET=20 bin/fm-contributions.sh poll   # poll 1/1
+poll 1 rc=0 elapsed=2s
+--- poll 1 stdout/stderr (verbatim):
+
+--- record after poll 1:
+{"task":"delivery","checked_at":"2026-10-07T15:50:03Z","error":null,"pending":0,"head":"e032f755e72ef9771458ae0064ef215900062c3a","state":"open"}
+--- wake queue:
+(empty)
+--- forge connection log (proxy-18920.log):
+11:50:02 proxy listening on 127.0.0.1:18920
+11:50:03 #1 api.github.com:443 TUNNEL
+11:50:04 #1 api.github.com:443 CLOSE
+11:50:04 #2 api.github.com:443 TUNNEL
+11:50:04 #7 api.github.com:443 TUNNEL
+11:50:04 #4 api.github.com:443 TUNNEL
+11:50:04 #6 api.github.com:443 TUNNEL
+11:50:04 #5 api.github.com:443 TUNNEL
+11:50:04 #3 api.github.com:443 TUNNEL
+11:50:04 #5 api.github.com:443 CLOSE
+11:50:04 #6 api.github.com:443 CLOSE
+11:50:04 #2 api.github.com:443 CLOSE
+11:50:04 #4 api.github.com:443 CLOSE
+11:50:05 #7 api.github.com:443 CLOSE
+11:50:05 #3 api.github.com:443 CLOSE
+11:50:05 #8 api.github.com:443 TUNNEL
+11:50:05 #8 api.github.com:443 CLOSE
+=== end scenario: s1-proxy-passthrough

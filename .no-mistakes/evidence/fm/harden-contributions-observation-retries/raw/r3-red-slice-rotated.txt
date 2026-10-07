@@ -1,0 +1,9 @@
+=== focused red: current test file's test_rotated_unreadable_url_first_does_not_abort_poll
+=== when: 2026-10-07T16:17:44Z
+=== product under ROOT: /tmp/r3-red.cDvDhF/bin/fm-contributions.sh (f8ecd43, pre-round-2-fix)
+=== runner line: for test_name in test_rotated_unreadable_url_first_does_not_abort_poll; do
+
+/tmp/r3-red.cDvDhF/bin/fm-contributions.sh: line 416: BUDGET_EXHAUSTED: unbound variable
+not ok - a poll whose first URL is unreadable aborted
+not ok - 1 contribution regressions
+rc=1

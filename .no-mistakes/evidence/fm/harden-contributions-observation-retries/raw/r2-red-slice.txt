@@ -1,0 +1,5 @@
+=== focused red: test_rotated_unreadable_url_first_does_not_abort_poll against f8ecd43 (pre-fix)
+=== when: 2026-10-07T16:04:20Z
+/tmp/r2-red.XLWCzc/bin/fm-contributions.sh: line 416: BUDGET_EXHAUSTED: unbound variable
+not ok - a poll whose first URL is unreadable aborted
+rc=1

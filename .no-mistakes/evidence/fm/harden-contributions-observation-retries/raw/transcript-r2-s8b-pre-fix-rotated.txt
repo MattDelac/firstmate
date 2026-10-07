@@ -1,0 +1,12 @@
+=== pre-fix live reproduction: f8ecd43, rotated GitLab-first order
+=== when: 2026-10-07T16:04:17Z
+=== product: extracted f8ecd43 bin/fm-contributions.sh in a marked lab home
+=== proxy rules: 1:fail 2:fail   budget: 20s
+$ poll rc=1
+--- poll stdout/stderr (verbatim):
+/tmp/fm-lab.IQG5wY/pre/bin/fm-contributions.sh: line 416: BUDGET_EXHAUSTED: unbound variable
+--- records after (both untouched):
+delivery: {"checked_at":"2026-01-01T00:00:00Z","error":null}
+gitlab: {"checked_at":"2026-01-01T00:00:00Z","error":null}
+--- forge connection log:
+12:04:17 proxy listening on 127.0.0.1:18980

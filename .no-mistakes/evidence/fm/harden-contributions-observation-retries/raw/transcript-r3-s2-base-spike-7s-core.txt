@@ -1,0 +1,20 @@
+=== scenario: s2-base-spike-7s-core
+=== when: 2026-10-07T16:16:46Z
+=== product: /tmp/fm-lab.WH6E30/base/bin/fm-contributions.sh
+=== proxy rules: 1:delay:7
+=== budget: 20s, polls: 1
+
+$ before:
+delivery: {"checked_at":"2026-01-01T00:00:00Z","error":null,"fresh_head":"e032f755e72ef9771458ae0064ef215900062c3a","state":"open"}
+$ proxy on 127.0.0.1:19003
+$ poll 1/1 rc=0 elapsed=5s
+--- poll 1 stdout/stderr (verbatim):
+--- records after poll 1:
+delivery: {"checked_at":"2026-01-01T00:00:00Z","error":null,"fresh_head":"e032f755e72ef9771458ae0064ef215900062c3a","state":"open"}
+--- forge connection log (proxy-19003.log):
+12:16:46 proxy listening on 127.0.0.1:19003
+12:16:46 #1 api.github.com:443 DELAY 7s begin
+--- wake queue:
+(empty)
+=== end scenario: s2-base-spike-7s-core
+
