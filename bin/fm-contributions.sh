@@ -257,11 +257,13 @@ wait_forges() { # background forge pids from one independent read wave
 
 observe() { # canonical GitHub URL -> normalized JSON
   local url=$1 part number kind endpoint head after label
+  # Evidence belongs to one observation: clear it before any early return so
+  # a URL this observer cannot read never inherits another URL's stderr.
+  : > "$TMP/last-forge.err"
   case "$url" in https://github.com/*) ;; *) return 1 ;; esac
   part=${url#https://github.com/}; number=${part##*/}; part=${part%/*}; kind=${part##*/}; part=${part%/*}
   case "$kind" in pull) endpoint="repos/$part/pulls/$number" ;; issues) endpoint="repos/$part/issues/$number" ;; *) return 1 ;; esac
   rm -f -- "$TMP/budget-exhausted" "$TMP/forge-unavailable"
-  : > "$TMP/last-forge.err"
   BUDGET_EXHAUSTED=0
   forge api "$endpoint" > "$TMP/core.json" || return 1
   jq -e '(.state == "open" or .state == "closed") and (.user.login | type == "string")' "$TMP/core.json" >/dev/null || return 1
