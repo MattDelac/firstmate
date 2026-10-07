@@ -378,6 +378,9 @@ settle_final() { # canonical-url task... : copy the URL's final observation to e
 poll() {
   local task url old kind error observed
   local -a row
+  # A leading URL this observer cannot read returns before observe initializes
+  # this; the retry check below must still see a defined value.
+  BUDGET_EXHAUSTED=0
   acquire
   get_input
   read_saved
